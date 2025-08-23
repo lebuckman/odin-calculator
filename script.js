@@ -23,8 +23,10 @@ operatorBtns.forEach((opBtn) =>
 );
 
 function handleNumber(number) {
-    currentNum += number;
-    currentNumberDisplay.textContent = currentNum;
+    if (currentNum.length < 10) {
+        currentNum += number;
+        currentNumberDisplay.textContent = currentNum;
+    }
 }
 
 function handleOperator(operator) {
