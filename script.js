@@ -12,7 +12,7 @@ const operatorBtns = document.querySelectorAll(".operation");
 
 let currentOperator = "";
 let currentNum = "";
-let prevNum = "";
+let previousNum = "";
 
 numberBtns.forEach((numBtn) =>
     numBtn.addEventListener("click", (e) => handleNumber(e.target.textContent))
@@ -22,17 +22,17 @@ operatorBtns.forEach((opBtn) =>
     opBtn.addEventListener("click", (e) => handleOperator(e.target.textContent))
 );
 
-function handleNumber(number) {
+function handleNumber(num) {
     if (currentNum.length < 10) {
-        currentNum += number;
+        currentNum += num;
         currentNumberDisplay.textContent = currentNum;
     }
 }
 
-function handleOperator(operator) {
-    currentOperator = operator;
-    prevNum = currentNum;
-    previousNumberDisplay.textContent = `${prevNum} ${currentOperator}`;
+function handleOperator(op) {
+    currentOperator = op;
+    previousNum = currentNum;
+    previousNumberDisplay.textContent = `${previousNum} ${currentOperator}`;
     currentNum = "";
     currentNumberDisplay.textContent = "";
 }
