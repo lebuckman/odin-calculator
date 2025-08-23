@@ -10,6 +10,8 @@ const percentBtn = document.querySelector(".percent");
 const numberBtns = document.querySelectorAll(".number");
 const operatorBtns = document.querySelectorAll(".operation");
 
+const MAX_DISPLAY_LENGTH = 9;
+
 let currentOperator = "";
 let currentNum = "";
 let previousNum = "";
@@ -25,7 +27,7 @@ operatorBtns.forEach((opBtn) =>
 );
 
 function handleNumber(num) {
-    if (currentNum.length < 10) {
+    if (currentNum.length < MAX_DISPLAY_LENGTH) {
         currentNum += num;
         currentNumberDisplay.textContent = currentNum;
     }
@@ -42,28 +44,31 @@ function handleOperator(op) {
 function operate() {
     switch (currentOperator) {
         case "+":
-            previousNum = add(previousNum, currentNum).toString();
+            previousNum = add(previousNum, currentNum);
             break;
         case "−":
-            previousNum = subtract(previousNum, currentNum).toString();
+            previousNum = subtract(previousNum, currentNum);
             break;
         case "×":
-            previousNum = multiply(previousNum, currentNum).toString();
+            previousNum = multiply(previousNum, currentNum);
             break;
         case "÷":
-            previousNum = divide(previousNum, currentNum).toString();
+            previousNum = divide(previousNum, currentNum);
             break;
     }
+    previousNum = parseFloat(previousNum.toFixed(6)).toString();
+
     displayResults();
 }
 
 function displayResults() {
     previousNumberDisplay.textContent = "";
     // currentOperator = "";
-    if (previousNum.length < 9) {
+    if (previousNum.length < MAX_DISPLAY_LENGTH) {
         currentNumberDisplay.textContent = previousNum;
     } else {
-        currentNumberDisplay.textContent = previousNum.slice(0, 9) + "...";
+        currentNumberDisplay.textContent =
+            previousNum.slice(0, MAX_DISPLAY_LENGTH) + "...";
     }
 }
 
