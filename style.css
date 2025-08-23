@@ -73,7 +73,8 @@ body {
     margin: 25px;
 }
 
-.operation {
+.operation,
+.equals {
     background-color: var(--accent);
 }
 
@@ -94,5 +95,5 @@ body {
 }
 
 #logo img {
-    width: 25px;
+    width: 23px;
 }
