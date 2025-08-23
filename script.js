@@ -56,7 +56,9 @@ function operate() {
             previousNum = divide(previousNum, currentNum);
             break;
     }
-    previousNum = parseFloat(previousNum.toFixed(6)).toString();
+    previousNum = parseFloat(
+        previousNum.toFixed(MAX_DISPLAY_LENGTH)
+    ).toString();
 
     displayResults();
 }
@@ -64,7 +66,7 @@ function operate() {
 function displayResults() {
     previousNumberDisplay.textContent = "";
     // currentOperator = "";
-    if (previousNum.length < MAX_DISPLAY_LENGTH) {
+    if (previousNum.length <= MAX_DISPLAY_LENGTH) {
         currentNumberDisplay.textContent = previousNum;
     } else {
         currentNumberDisplay.textContent =
