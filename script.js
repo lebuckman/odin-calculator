@@ -122,6 +122,7 @@ function handleDelete() {
         currentNumberDisplay.textContent = currentNum;
 
         if (currentNum === "") {
+            currentNum = "";
             currentNumberDisplay.textContent = "0";
         }
     } else if (currentNum === "" && previousNum !== "") {
