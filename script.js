@@ -14,6 +14,8 @@ let currentOperator = "";
 let currentNum = "";
 let previousNum = "";
 
+equalsBtn.addEventListener("click", operate);
+
 numberBtns.forEach((numBtn) =>
     numBtn.addEventListener("click", (e) => handleNumber(e.target.textContent))
 );
@@ -35,6 +37,34 @@ function handleOperator(op) {
     previousNumberDisplay.textContent = `${previousNum} ${currentOperator}`;
     currentNum = "";
     currentNumberDisplay.textContent = "";
+}
+
+function operate() {
+    switch (currentOperator) {
+        case "+":
+            previousNum = add(previousNum, currentNum).toString();
+            break;
+        case "−":
+            previousNum = subtract(previousNum, currentNum).toString();
+            break;
+        case "×":
+            previousNum = multiply(previousNum, currentNum).toString();
+            break;
+        case "÷":
+            previousNum = divide(previousNum, currentNum).toString();
+            break;
+    }
+    displayResults();
+}
+
+function displayResults() {
+    previousNumberDisplay.textContent = "";
+    // currentOperator = "";
+    if (previousNum.length < 9) {
+        currentNumberDisplay.textContent = previousNum;
+    } else {
+        currentNumberDisplay.textContent = previousNum.slice(0, 9) + "...";
+    }
 }
 
 function add(a, b) {
