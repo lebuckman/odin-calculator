@@ -22,6 +22,8 @@ equalsBtn.addEventListener("click", () => {
     }
 });
 
+clearBtn.addEventListener("click", clear);
+
 numberBtns.forEach((numBtn) =>
     numBtn.addEventListener("click", (e) => handleNumber(e.target.textContent))
 );
@@ -76,6 +78,14 @@ function displayResults() {
         currentNumberDisplay.textContent =
             previousNum.slice(0, MAX_DISPLAY_LENGTH) + "...";
     }
+}
+
+function clear() {
+    currentOperator = "";
+    currentNum = "";
+    previousNum = "";
+    currentNumberDisplay.textContent = "0";
+    previousNumberDisplay.textContent = "";
 }
 
 function add(a, b) {
