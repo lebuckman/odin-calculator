@@ -73,6 +73,13 @@ body {
     margin: 10px 25px 25px;
 }
 
+.equals {
+    grid-column: span 2;
+    width: 100%;
+    aspect-ratio: auto;
+    border-radius: 25px;
+}
+
 .operation,
 .equals {
     background-color: var(--accent);
