@@ -39,15 +39,26 @@ operatorBtns.forEach((opBtn) =>
 );
 
 function handleNumber(num) {
-    if (previousNum !== "" && currentNum !== "" && currentOperator === "") {
+    if (previousNum !== "" && currentNum === "" && currentOperator === "") {
+        currentNum = previousNum;
         previousNum = "";
-        currentNumberDisplay.textContent = currentNum;
     }
 
-    if (currentNum.length < MAX_DISPLAY_LENGTH) {
+    if (currentNumberDisplay.textContent === "0" && currentNum === "") {
+        currentNum = num;
+    } else if (currentNum.length < MAX_DISPLAY_LENGTH) {
         currentNum += num;
-        currentNumberDisplay.textContent = currentNum;
     }
+
+    if (
+        currentNum.length > 1 &&
+        currentNum.startsWith("0") &&
+        !currentNum.includes(".")
+    ) {
+        currentNum = currentNum.replace(/^0+/, "");
+    }
+
+    currentNumberDisplay.textContent = currentNum;
 }
 
 function handleOperator(op) {
@@ -119,14 +130,10 @@ function clear() {
 function handleDelete() {
     if (currentNum !== "") {
         currentNum = currentNum.slice(0, -1);
-        currentNumberDisplay.textContent = currentNum;
-
-        if (currentNum === "") {
-            currentNum = "";
-            currentNumberDisplay.textContent = "0";
-        }
+        currentNumberDisplay.textContent = currentNum || "0";
     } else if (currentNum === "" && previousNum !== "") {
         currentNum = previousNum;
+        previousNum = "";
         currentOperator = "";
         previousNumberDisplay.textContent = "";
         currentNumberDisplay.textContent = currentNum;
