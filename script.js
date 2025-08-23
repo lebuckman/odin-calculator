@@ -33,6 +33,11 @@ operatorBtns.forEach((opBtn) =>
 );
 
 function handleNumber(num) {
+    if (previousNum !== "" && currentNum !== "" && currentOperator === "") {
+        previousNum = "";
+        currentNumberDisplay.textContent = currentNum;
+    }
+
     if (currentNum.length < MAX_DISPLAY_LENGTH) {
         currentNum += num;
         currentNumberDisplay.textContent = currentNum;
@@ -40,14 +45,30 @@ function handleNumber(num) {
 }
 
 function handleOperator(op) {
+    if (previousNum === "") {
+        previousNum = currentNum;
+        checkOperator(op);
+    } else if (currentNum === "") {
+        checkOperator(op);
+    } else {
+        operate();
+        currentOperator = op;
+        currentNumberDisplay.textContent = "0";
+        previousNumberDisplay.textContent = `${previousNum} ${currentOperator}`;
+    }
+}
+
+function checkOperator(op) {
     currentOperator = op;
-    previousNum = currentNum;
     previousNumberDisplay.textContent = `${previousNum} ${currentOperator}`;
-    currentNum = "";
     currentNumberDisplay.textContent = "";
+    currentNum = "";
 }
 
 function operate() {
+    previousNum = Number(previousNum);
+    currentNum = Number(currentNum);
+
     switch (currentOperator) {
         case "+":
             previousNum = add(previousNum, currentNum);
@@ -70,14 +91,15 @@ function operate() {
 }
 
 function displayResults() {
-    previousNumberDisplay.textContent = "";
-    // currentOperator = "";
     if (previousNum.length <= MAX_DISPLAY_LENGTH) {
         currentNumberDisplay.textContent = previousNum;
     } else {
         currentNumberDisplay.textContent =
             previousNum.slice(0, MAX_DISPLAY_LENGTH) + "...";
     }
+    previousNumberDisplay.textContent = "";
+    currentOperator = "";
+    currentNum = "";
 }
 
 function clear() {
@@ -89,21 +111,21 @@ function clear() {
 }
 
 function add(a, b) {
-    return Number(a) + Number(b);
+    return a + b;
 }
 
 function subtract(a, b) {
-    return Number(a) - Number(b);
+    return a - b;
 }
 
 function multiply(a, b) {
-    return Number(a) * Number(b);
+    return a * b;
 }
 
 function divide(a, b) {
-    if (Number(b) <= 0) {
+    if (b <= 0) {
         return "Error";
     }
 
-    return Number(a) / Number(b);
+    return a / b;
 }
