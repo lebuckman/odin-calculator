@@ -62,6 +62,10 @@ function handleNumber(num) {
 }
 
 function handleOperator(op) {
+    if (currentNum === "" && previousNum === "") {
+        return;
+    }
+
     if (previousNum === "") {
         previousNum = currentNum;
         checkOperator(op);
