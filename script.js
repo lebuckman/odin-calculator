@@ -16,6 +16,8 @@ let currentOperator = "";
 let currentNum = "";
 let previousNum = "";
 
+window.addEventListener("keydown", handleKeyPress);
+
 clearBtn.addEventListener("click", clear);
 
 equalsBtn.addEventListener("click", () => {
@@ -136,5 +138,40 @@ function addDecimal() {
     if (!currentNum.includes(".")) {
         currentNum += ".";
         currentNumberDisplay.textContent = currentNum;
+    }
+}
+
+function handleKeyPress(e) {
+    e.preventDefault();
+
+    const pressedKey = e.key;
+
+    if (pressedKey >= 0 && pressedKey <= 9) {
+        handleNumber(pressedKey);
+    }
+
+    if (
+        pressedKey === "Enter" ||
+        (pressedKey === "=" && currentNum !== "" && previousNum !== "")
+    ) {
+        operate();
+    }
+
+    switch (pressedKey) {
+        case "+":
+            handleOperator("+");
+            break;
+        case "-":
+            handleOperator("−");
+            break;
+        case "*":
+            handleOperator("×");
+            break;
+        case "/":
+            handleOperator("÷");
+            break;
+        case ".":
+            addDecimal();
+            break;
     }
 }
