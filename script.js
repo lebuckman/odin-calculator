@@ -161,10 +161,13 @@ function divide(a, b) {
 }
 
 function addDecimal() {
-    if (!currentNum.includes(".")) {
+    if (currentNum === "") {
+        currentNum = "0.";
+    } else if (!currentNum.includes(".")) {
         currentNum += ".";
-        currentNumberDisplay.textContent = currentNum;
     }
+
+    currentNumberDisplay.textContent = currentNum;
 }
 
 function handleKeyPress(e) {
