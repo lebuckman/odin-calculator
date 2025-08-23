@@ -20,6 +20,8 @@ window.addEventListener("keydown", handleKeyPress);
 
 clearBtn.addEventListener("click", clear);
 
+delBtn.addEventListener("click", handleDelete);
+
 equalsBtn.addEventListener("click", () => {
     if (currentNum !== "" && previousNum !== "") {
         operate();
@@ -65,7 +67,7 @@ function handleOperator(op) {
 function checkOperator(op) {
     currentOperator = op;
     previousNumberDisplay.textContent = `${previousNum} ${currentOperator}`;
-    currentNumberDisplay.textContent = "";
+    currentNumberDisplay.textContent = "0";
     currentNum = "";
 }
 
@@ -112,6 +114,22 @@ function clear() {
     previousNum = "";
     currentNumberDisplay.textContent = "0";
     previousNumberDisplay.textContent = "";
+}
+
+function handleDelete() {
+    if (currentNum !== "") {
+        currentNum = currentNum.slice(0, -1);
+        currentNumberDisplay.textContent = currentNum;
+
+        if (currentNum === "") {
+            currentNumberDisplay.textContent = "0";
+        }
+    } else if (currentNum === "" && previousNum !== "") {
+        currentNum = previousNum;
+        currentOperator = "";
+        previousNumberDisplay.textContent = "";
+        currentNumberDisplay.textContent = currentNum;
+    }
 }
 
 function add(a, b) {
@@ -172,6 +190,9 @@ function handleKeyPress(e) {
             break;
         case ".":
             addDecimal();
+            break;
+        case "Backspace":
+            handleDelete();
             break;
     }
 }
