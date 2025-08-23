@@ -16,13 +16,15 @@ let currentOperator = "";
 let currentNum = "";
 let previousNum = "";
 
+clearBtn.addEventListener("click", clear);
+
 equalsBtn.addEventListener("click", () => {
     if (currentNum !== "" && previousNum !== "") {
         operate();
     }
 });
 
-clearBtn.addEventListener("click", clear);
+decimalBtn.addEventListener("click", addDecimal);
 
 numberBtns.forEach((numBtn) =>
     numBtn.addEventListener("click", (e) => handleNumber(e.target.textContent))
@@ -128,4 +130,11 @@ function divide(a, b) {
     }
 
     return a / b;
+}
+
+function addDecimal() {
+    if (!currentNum.includes(".")) {
+        currentNum += ".";
+        currentNumberDisplay.textContent = currentNum;
+    }
 }
