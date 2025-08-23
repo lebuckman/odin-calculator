@@ -16,7 +16,11 @@ let currentOperator = "";
 let currentNum = "";
 let previousNum = "";
 
-equalsBtn.addEventListener("click", operate);
+equalsBtn.addEventListener("click", () => {
+    if (currentNum !== "" && previousNum !== "") {
+        operate();
+    }
+});
 
 numberBtns.forEach((numBtn) =>
     numBtn.addEventListener("click", (e) => handleNumber(e.target.textContent))
