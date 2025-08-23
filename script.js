@@ -80,7 +80,9 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-    if (b === 0) return 0; // Return 0 when dividing by 0
+    if (Number(b) <= 0) {
+        return "Error";
+    }
 
     return Number(a) / Number(b);
 }
