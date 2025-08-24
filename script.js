@@ -104,9 +104,15 @@ function operate() {
             previousNum = divide(previousNum, currentNum);
             break;
     }
-    previousNum = parseFloat(
-        previousNum.toFixed(MAX_DISPLAY_LENGTH)
-    ).toString();
+
+    if (previousNum === null) {
+        alert("Cannot divide by zero");
+        previousNum = "0";
+    } else {
+        previousNum = parseFloat(
+            previousNum.toFixed(MAX_DISPLAY_LENGTH)
+        ).toString();
+    }
 
     displayResults();
 }
@@ -157,8 +163,8 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-    if (b <= 0) {
-        return "Error";
+    if (b === 0) {
+        return null;
     }
 
     return a / b;
