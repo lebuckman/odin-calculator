@@ -8,7 +8,6 @@ Noteable change from instructions:
 Known Bugs:
 
 -   If an answer to an equation is 0, adding an operand 0 < n < 1 such as 0.1, then selecting an operator, the previous value will change back to 0.
--   Divide by Zero handling has uncaught error.
 
 Future Adjustments:
 
